@@ -20,7 +20,10 @@ import cz.jirutka.commons.persistence.dao.OrderBy;
 import cz.jirutka.commons.persistence.dao.PagingOrdering;
 import java.util.Iterator;
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
+import org.hibernate.sql.JoinType;
 
 /**
  * This is concrete {@link Criteria} decorator that implements the Visitor 
@@ -129,4 +132,90 @@ public class ExtendedCriteria extends AbstractCriteriaDecorator<ExtendedCriteria
         }
     }
 
+    /**
+     * Join an association using the specified join-type, assigning an alias
+     * to the joined association.
+     * <p/>
+     * The joinType is expected to be one of {@link org.hibernate.sql.JoinType#INNER_JOIN} (the default),
+     * {@link org.hibernate.sql.JoinType#FULL_JOIN}, or {@link org.hibernate.sql.JoinType#LEFT_OUTER_JOIN}.
+     *
+     * @param associationPath A dot-seperated property path
+     * @param alias           The alias to assign to the joined association (for later reference).
+     * @param joinType        The type of join to use.
+     * @return this (for method chaining)
+     * @throws org.hibernate.HibernateException
+     *          Indicates a problem creating the sub criteria
+     */
+    @Override
+    public Criteria createAlias(String associationPath, String alias, JoinType joinType) throws HibernateException {
+        return criteria.createAlias(associationPath, alias, joinType);
+    }
+
+    /**
+     * Join an association using the specified join-type, assigning an alias
+     * to the joined association.
+     * <p/>
+     * The joinType is expected to be one of {@link org.hibernate.sql.JoinType#INNER_JOIN} (the default),
+     * {@link org.hibernate.sql.JoinType#FULL_JOIN}, or {@link org.hibernate.sql.JoinType#LEFT_OUTER_JOIN}.
+     *
+     * @param associationPath A dot-seperated property path
+     * @param alias           The alias to assign to the joined association (for later reference).
+     * @param joinType        The type of join to use.
+     * @param withClause      The criteria to be added to the join condition (<tt>ON</tt> clause)
+     * @return this (for method chaining)
+     * @throws org.hibernate.HibernateException
+     *          Indicates a problem creating the sub criteria
+     */
+    @Override
+    public Criteria createAlias(String associationPath, String alias, JoinType joinType, Criterion withClause) throws HibernateException {
+        return criteria.createAlias(associationPath, alias, joinType, withClause);
+    }
+
+    /**
+     * Create a new <tt>Criteria</tt>, "rooted" at the associated entity, using the
+     * specified join type.
+     *
+     * @param associationPath A dot-seperated property path
+     * @param joinType        The type of join to use.
+     * @return the created "sub criteria"
+     * @throws org.hibernate.HibernateException
+     *          Indicates a problem creating the sub criteria
+     */
+    @Override
+    public Criteria createCriteria(String associationPath, JoinType joinType) throws HibernateException {
+        return criteria.createCriteria(associationPath, joinType);
+    }
+
+    /**
+     * Create a new <tt>Criteria</tt>, "rooted" at the associated entity,
+     * assigning the given alias and using the specified join type.
+     *
+     * @param associationPath A dot-seperated property path
+     * @param alias           The alias to assign to the joined association (for later reference).
+     * @param joinType        The type of join to use.
+     * @return the created "sub criteria"
+     * @throws org.hibernate.HibernateException
+     *          Indicates a problem creating the sub criteria
+     */
+    @Override
+    public Criteria createCriteria(String associationPath, String alias, JoinType joinType) throws HibernateException {
+        return criteria.createCriteria(associationPath, alias, joinType);
+    }
+
+    /**
+     * Create a new <tt>Criteria</tt>, "rooted" at the associated entity,
+     * assigning the given alias and using the specified join type.
+     *
+     * @param associationPath A dot-seperated property path
+     * @param alias           The alias to assign to the joined association (for later reference).
+     * @param joinType        The type of join to use.
+     * @param withClause      The criteria to be added to the join condition (<tt>ON</tt> clause)
+     * @return the created "sub criteria"
+     * @throws org.hibernate.HibernateException
+     *          Indicates a problem creating the sub criteria
+     */
+    @Override
+    public Criteria createCriteria(String associationPath, String alias, JoinType joinType, Criterion withClause) throws HibernateException {
+        return criteria.createCriteria(associationPath, alias, joinType, withClause);
+    }
 }
