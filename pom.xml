@@ -78,27 +78,11 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.6.1</version>
         </dependency>
-        
-        <!-- Test scope -->
+
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.10</version>
-            <scope>test</scope>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb</artifactId>
-            <version>1.8.0.10</version>
-            <scope>test</scope>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>3.6.3.Final</version>
-            <scope>test</scope>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
         </dependency>
         
     </dependencies>
@@ -112,6 +96,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
